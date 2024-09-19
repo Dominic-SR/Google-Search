@@ -1,9 +1,25 @@
-import React from 'react'
+import React, { FormEvent, useRef } from 'react'
 import { MicrophoneIcon, SearchIcon, ViewGridIcon } from "@heroicons/react/solid" 
 import Avatar from '../Components/Avatar';
 import Footer from '../Components/Footer';
+import { useNavigate } from 'react-router-dom';
+import { useResultContext } from '../Context/ResultContextProvider';
 
 const Home = () => {
+
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
+  const { setSearchTerm } = useResultContext();
+
+  const serach = (e:FormEvent<HTMLFormElement>)=>{
+    e.preventDefault();
+    const term = searchInputRef.current?.value;
+    
+    setSearchTerm(term?term:'');
+    navigate("/search");
+
+  }
+
   return (
     <div className='flex flex-col items-center justify-center h-screen'>
         <header className='flex w-full p-5 justify-between text-sm text-gray-700'>
@@ -21,7 +37,7 @@ const Home = () => {
             </div>
         </header>    
 
-        <form className='flex flex-col items-center mt-44 flex-grow w-4/5'>
+        <form onSubmit={serach} className='flex flex-col items-center mt-44 flex-grow w-4/5'>
             <img 
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/368px-Google_2015_logo.svg.png"
             height={900}
@@ -32,6 +48,7 @@ const Home = () => {
               <SearchIcon className='h-5 mr-3 text-gray-500' />
               
               <input 
+                ref={searchInputRef}
                 type='text'
                 className='focus:outline-none flex-grow'
               />
