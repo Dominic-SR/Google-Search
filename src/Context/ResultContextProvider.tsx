@@ -24,7 +24,8 @@ export const ResultContext = createContext<ContextInterface>({
     isLoading:false,
 })
 
-const baseUrl = "https:google-search3.p.rapidapi.com/api/v1"
+// const baseUrl = "https:google-search3.p.rapidapi.com/api/v1"
+const baseUrl = "https://google-search72.p.rapidapi.com"
 
 interface props{
     children:ReactNode
@@ -38,12 +39,15 @@ export const ResultContextProvider:FC<props> = ({ children }) =>{
   const getResults = async(type:string)=>{
     setIsLoading(true);
 
+    console.log("API",process.env.REACT_APP_API_KEY);
+    
+
     const response = await fetch(`${baseUrl}${type}`,{
         method:'GET',
         headers:{
             "x-user-agent":"desktop",
             "x-proxy-location":"US",
-            "x-rapidapi-host":"google-search3.p.rapidapi.com",
+            "x-rapidapi-host": "google-search72.p.rapidapi.com",
             "x-rapidapi-key":process.env.REACT_APP_API_KEY ? process.env.REACT_APP_API_KEY : "",
         }
     });
