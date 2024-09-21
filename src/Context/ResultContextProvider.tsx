@@ -53,15 +53,18 @@ export const ResultContextProvider:FC<props> = ({ children }) =>{
     });
 
     const data = await response.json();
-
     if(type.includes("/news")){
+        console.log("NEWS");
+        
         setResults(data.entries)
     }else if(type.includes("/image")){
+        console.log("IMAGE");
         setResults(data.image_results)
     }else{
-        setResults(data.results)
+        console.log("EMPTY");
+        setResults(data.items)
     }
-    setIsLoading(false)
+    // setIsLoading(false)
   }
 
   const sampleAppContext:ContextInterface | null ={

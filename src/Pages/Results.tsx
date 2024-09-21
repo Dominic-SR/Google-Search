@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useResultContext } from '../Context/ResultContextProvider'
 import { useLocation } from 'react-router-dom';
+import Loading from '../Components/Loading';
 
 interface Results {
 
@@ -24,7 +25,17 @@ const Results = () => {
       }
   },[searchTerm, location.pathname])
 
-  console.log(results);
+  console.log("RES+++>",results);
+
+  if(isLoading){
+    console.log("hereeeee");
+    
+    return(
+      <>
+        <Loading />
+      </>
+    )
+  }
   
   return (
     <div>Results</div>
