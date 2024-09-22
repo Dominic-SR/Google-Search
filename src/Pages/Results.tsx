@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useResultContext } from '../Context/ResultContextProvider'
 import { useLocation } from 'react-router-dom';
 import Loading from '../Components/Loading';
+import Header from '../Components/Header';
 
 interface Results {
 
@@ -10,7 +11,7 @@ interface Results {
 const Results = () => {
   const {results, isLoading, getResults, searchTerm} = useResultContext();
   const location = useLocation();
-  const [selected, setSelected] = useState<string>()
+  const [selected, setSelected] = useState<string>('')
 
   useEffect(()=>{
       if(searchTerm){
@@ -32,13 +33,16 @@ const Results = () => {
     
     return(
       <>
+      <Header selected={selected} />
         <Loading />
       </>
     )
   }
   
   return (
-    <div>Results</div>
+    <div>
+      <Header selected={selected} />
+    </div>
   )
 }
 
